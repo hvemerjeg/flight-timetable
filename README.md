@@ -34,7 +34,7 @@ Run the program to display flights:
 python displayflights.py
 ```
 
-#### Debug Mode
+#### Test Mode
 Run the program with the `--test` option to populate the database with random data for demo purposes:
 ```bash
 python managedatabase.py --test
