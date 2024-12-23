@@ -15,6 +15,7 @@ This project simulates an airport flight information screen, allowing users to v
 2. **`managedatabase.py`**: Manages flight data in the database.
 3. **`generaterandomdata.py`**: Generates random flight data when test mode is activated.
 4. **`loadingmotions.py`**: Provides animations for terminal progress bars or loading screens.
+5. **consultairlineflightcode.py**: Consult IATA to check the two-letter code associated with a specific airline.
 
 ## Getting Started
 
