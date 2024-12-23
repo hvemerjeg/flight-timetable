@@ -1,8 +1,8 @@
-from datetime import datetime, time
+from datetime import datetime
 import sqlite3
 import signal
 import sys
-from time import sleep
+from time import sleep, time
 from os import system, remove, path
 import logging
 import argparse
@@ -26,12 +26,12 @@ parser.add_argument("--test", help="Test mode. This creates a database with rand
                     action="store_true")
 args = parser.parse_args()
 
-def initializeDatabase(database_file):
+def initializeDatabase(database_file:str) -> None:
     managedatabase.FlightsManager(database_file)
     managedatabase.FlightsManager().createTable(ARRIVALS)
     managedatabase.FlightsManager().createTable(DEPARTURES)
 
-def insertRandomData(tablename:str):
+def insertRandomData(tablename:str) -> None:
         # Insert random data in case that the database is empty
         random_flight_code = generaterandomdata.GenerateRandomFlights().generateRandomFlightCode()
         random_gate = generaterandomdata.GenerateRandomFlights().generateRandomGate()
@@ -48,20 +48,18 @@ def insertRandomData(tablename:str):
             managedatabase.FlightsManager().insertFlight(tablename, (random_flight_code, random_origin,\
                 random_time, random_gate, random_status, random_airline))
 
-def adjustTime(time:str):
-    if len(time) < 4:
-        time = '0' + time
-    if len(time) < 4:
-        time = time + '0'
-    return f'{time[:2]}:{time[2:]}'
+def formatTime(epoch_time:str) -> str:
+    datetime_obj = datetime.fromtimestamp(epoch_time)
+    time_str = datetime_obj.strftime('%H:%M')
+    return str(time_str)
 
 class FlightTimeTableTerminal:
     def displayFlights(self) -> None:
     # display arrivals and departures
         system('clear')
         for counter, table in enumerate((ARRIVALS, DEPARTURES)):
-            tables = managedatabase.FlightsManager().getCurrentArrivals(int(datetime.now().strftime('%H%M'))) if not counter else \
-                    managedatabase.FlightsManager().getCurrentDepartures(int(datetime.now().strftime('%H%M')))
+            tables = managedatabase.FlightsManager().getCurrentArrivals(int(time())) if not counter else \
+                    managedatabase.FlightsManager().getCurrentDepartures(int(time()))
             table_columns = managedatabase.FlightsManager().getColumns(table) 
             print(f'{table}'.upper().center(150, '-'))
             # Display columns but not index column
@@ -80,30 +78,33 @@ class FlightTimeTableTerminal:
                 for indx in range(1, len(result)):
                     data = result[indx]
                     if isinstance(data, int):
-                        data = str(data)
-                        data = adjustTime(data)
-                    print(data.ljust(20), end='') # Data from the database can be an integer type
+                        data = formatTime(data)
+                    print(data.ljust(20), end='')
                 print('')
             print('\n\n')
         sleep(1)
 
-def main():
+def main() -> None:
     if args.test:
-        database_file = 'flights.db'
+        database_file = 'test_flights.db'
         if path.exists(f'./{database_file}'):
+            if not path.exists(f'./{database_file}.bak'):
+                system(f'cp {database_file} {database_file}.bak')
+                print(f'[ + ] A backup of the {database_file} database was made')
             remove(database_file)
         print('[ + ] Test mode is on')
         print('[ + ] Initializing database with random data')
         loadingmotions.loadingMotion()
         initializeDatabase(database_file)
         logging.info('Inserting data into tables')
-        for tablename in [ARRIVALS, DEPARTURES]:
-            for num in range(20):
+        total_rows = 0
+        while total_rows < 20:
+            for tablename in [ARRIVALS, DEPARTURES]:
                 insertRandomData(tablename)
+                total_rows += 1
     while True:
         FlightTimeTableTerminal().displayFlights()
         sleep(30)
-
 
 if __name__ == '__main__':
     main()
