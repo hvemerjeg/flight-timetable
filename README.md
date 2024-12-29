@@ -1,5 +1,5 @@
 # Airport Flight timetable
-This project simulates an airport flight information screen, allowing users to view flights and workers to manage the database.
+This simple project simulates an airport flight information screen, allowing users to view flights and workers to manage the database.
 
 ## Features
 - **Display Flights**: A terminal-based program to display flight details. This program automatically updates and only shows flights within the next 24 hours.(`displayflights.py`).
