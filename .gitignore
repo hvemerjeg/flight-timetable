@@ -168,6 +168,6 @@ cython_debug/
 #.idea/
 
 # Personal
-*.bak
+*.bak*
 notes.md
 *.db
