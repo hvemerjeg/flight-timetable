@@ -30,9 +30,8 @@ class GenerateRandomFlights:
         return random_gate
 
     def generateRandomTime(self):
-        current_time = datetime.now()
-        current_time = int(current_time.replace(second=0, microsecond=0).timestamp())
-        result_time = current_time + GenerateRandomFlights.random_num
+        epoch = int(datetime(datetime.now().year, datetime.now().month, datetime.now().day, datetime.now().hour, datetime.now().minute).timestamp())
+        result_time = epoch + GenerateRandomFlights.random_num
         GenerateRandomFlights.random_num += random.choice([60, 120, 180, 240, 300])
         return int(result_time)
 

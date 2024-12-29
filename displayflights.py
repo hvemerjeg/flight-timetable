@@ -31,12 +31,11 @@ args = parser.parse_args()
 class FlightTimeTableTerminal:
     def displayFlights(self, databasefile:str, stty_size:tuple) -> None:
     # display arrivals and departures
-        time = datetime.now()
-        time = int(time.replace(second=0, microsecond=0).timestamp())
+        epoch = int(datetime(datetime.now().year, datetime.now().month, datetime.now().day, datetime.now().hour, datetime.now().minute).timestamp())
         system('clear')
         for counter, table in enumerate((ARRIVALS, DEPARTURES)):
-            tables = managedatabase.FlightsManager(databasefile=databasefile).getCurrentArrivals(time) if not counter else \
-                    managedatabase.FlightsManager(databasefile=databasefile).getCurrentDepartures(time)
+            tables = managedatabase.FlightsManager(databasefile=databasefile).getCurrentArrivals(epoch) if not counter else \
+                    managedatabase.FlightsManager(databasefile=databasefile).getCurrentDepartures(epoch)
             table_columns = managedatabase.FlightsManager().getColumns(table) 
             print(f'{table}'.upper().center(stty_size[0], '-'))
             # Display columns but not index column
