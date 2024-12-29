@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta
 import random
-import time
 
 class GenerateRandomFlights:
     random_data_dict = {
@@ -11,7 +10,7 @@ class GenerateRandomFlights:
 
     alphabet = [chr(point_code) for point_code in range(ord('A'), ord('F') + 1)]
     random_indx = random.randint(1, len(random_data_dict['airlines']) - 1)
-    random_num = random.randint(60, 2 * 60)
+    random_num = random.choice([60, 120])
 
     def generateRandomFlightCode(self):
         # This function needs to be call before the getRandomAirline function
@@ -28,9 +27,10 @@ class GenerateRandomFlights:
         return random_gate
 
     def generateRandomTime(self):
-        current_time = time.time()
+        current_time = datetime.now()
+        current_time = int(current_time.replace(second=0, microsecond=0).timestamp())
         result_time = current_time + GenerateRandomFlights.random_num
-        GenerateRandomFlights.random_num += random.randint(60, 5 * 60)
+        GenerateRandomFlights.random_num += random.choice([60, 120, 180, 240, 300])
         return int(result_time)
 
     def getRandomDestination(self):
