@@ -26,6 +26,12 @@ This simple project simulates an airport flight information screen, allowing use
    cd flight-timetable 
    ```
 ### Usage
+#### Get help
+Get help to list the available options:
+```bash
+python displayflights.py --help
+python managedatabase.py --help
+```
 #### Normal Mode
 Run the program to display flights:
 ```bash
