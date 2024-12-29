@@ -4,7 +4,6 @@ This project simulates an airport flight information screen, allowing users to v
 ## Features
 - **Display Flights**: A terminal-based program to display flight details. This program automatically updates and only shows flights within the next 24 hours.(`displayflights.py`).
 - **Manage Database**: Tools to manage the flight database (`managedatabase.py`). This is for the workers to manage the flights information manually when needed.
-- **Test Mode**: Populate the database with random data for a demo experience (`generaterandomdata.py`).
 
 ## Modules
 1. **`displayflights.py`**: Displays the flight details in a terminal interface.
