@@ -23,7 +23,10 @@ class GenerateRandomFlights:
         random_gate = ''
         random_gate += GenerateRandomFlights.alphabet[random.randint(0, 5)]
         for num in range(2):
-            random_gate += str(random.randint(0, 9))
+            if num == 0:
+                random_gate += str(random.randint(1, 9))
+            elif num == 1:
+                random_gate += str(random.randint(0, 9))
         return random_gate
 
     def generateRandomTime(self):

@@ -2,7 +2,7 @@ from datetime import datetime
 import sqlite3
 import signal
 import sys
-from time import sleep, time
+from time import sleep, time as _time
 from os import system, remove, path, get_terminal_size
 import logging
 import argparse
@@ -31,10 +31,12 @@ args = parser.parse_args()
 class FlightTimeTableTerminal:
     def displayFlights(self, databasefile:str, stty_size:tuple) -> None:
     # display arrivals and departures
+        time = datetime.now()
+        time = int(time.replace(second=0, microsecond=0).timestamp())
         system('clear')
         for counter, table in enumerate((ARRIVALS, DEPARTURES)):
-            tables = managedatabase.FlightsManager(databasefile=databasefile).getCurrentArrivals(int(time())) if not counter else \
-                    managedatabase.FlightsManager(databasefile=databasefile).getCurrentDepartures(int(time()))
+            tables = managedatabase.FlightsManager(databasefile=databasefile).getCurrentArrivals(time) if not counter else \
+                    managedatabase.FlightsManager(databasefile=databasefile).getCurrentDepartures(time)
             table_columns = managedatabase.FlightsManager().getColumns(table) 
             print(f'{table}'.upper().center(stty_size[0], '-'))
             # Display columns but not index column

@@ -109,14 +109,18 @@ class FlightsManager:
         return self.cursor.execute(f'SELECT * FROM {DEPARTURES} ORDER BY time ASC;').fetchall()
 
     def getCurrentArrivals(self, current_time:int) -> list[tuple]:
+        time = datetime.now()
+        time = int(time.replace(second=0, microsecond=0).timestamp())
         if isinstance(current_time, int): 
             return self.cursor.execute(f'SELECT * FROM {ARRIVALS} WHERE time >= ? AND time <= ? ORDER BY time ASC', (current_time, \
-                    _time() + 86400)).fetchall()
+                    time + 86400)).fetchall()
 
     def getCurrentDepartures(self, current_time:int) -> list[tuple]:
+        time = datetime.now()
+        time = int(time.replace(second=0, microsecond=0).timestamp())
         if isinstance(current_time, int): 
             return self.cursor.execute(f'SELECT * FROM {DEPARTURES} WHERE time >= ? AND time <= ? ORDER BY time ASC', (current_time, \
-                    _time() + 86400)).fetchall()
+                    time + 86400)).fetchall()
 
     def deleteFlight(self, tablename:str, flight_code:tuple, flight_time:str) -> None:
         self.cursor.execute(f'DELETE FROM {tablename} WHERE flight_code = ? AND time = ?', (flight_code, flight_time)) 
