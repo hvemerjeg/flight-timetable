@@ -27,7 +27,7 @@ This simple project simulates an airport flight information screen, allowing use
    ```
 ### Usage
 #### Get help
-Get help to list the available options:
+List the available options:
 ```bash
 python displayflights.py --help
 python managedatabase.py --help
