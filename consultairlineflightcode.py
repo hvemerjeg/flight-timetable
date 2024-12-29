@@ -12,9 +12,12 @@ def getFlightCode(airline:str) -> str:
     except requests.ConnectionError:
         sys.stderr.write('A connection error occurred\nCheck your internet connection.\n')
         exit(1)
+    except Exception as e:
+        sys.stderr.write(f'{e}\n')
+        exit(1)
     airline_codes = re.findall(pattern_airline_codes, r.text)
     if airline_codes:
-        airline_codes = list(map(str.replace('>', '').replace('<', '')), airline_codes)
+        airline_codes = list(map(lambda x: x.replace('>', '').replace('<', ''), airline_codes))
         return airline_codes
     else:
         return []

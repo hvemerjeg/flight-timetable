@@ -1,14 +1,10 @@
 # Airport Flight timetable
-
-**This project is currently under development.**
-
 This project simulates an airport flight information screen, allowing users to view flights and workers to manage the database.
 
 ## Features
-- **Display Flights**: A terminal-based program to display flight details. This program automatically updates and only shows flights that have a departure time greater than or equal to the current time.(`displayflights.py`).
-- **Manage Database**: Tools to manage the flight database (`managedatabase.py`).
+- **Display Flights**: A terminal-based program to display flight details. This program automatically updates and only shows flights within the next 24 hours.(`displayflights.py`).
+- **Manage Database**: Tools to manage the flight database (`managedatabase.py`). This is for the workers to manage the flights information manually when needed.
 - **Test Mode**: Populate the database with random data for a demo experience (`generaterandomdata.py`).
-- **Loading Animations**: Terminal animations during operations (`loadingmotions.py`).
 
 ## Modules
 1. **`displayflights.py`**: Displays the flight details in a terminal interface.
@@ -16,6 +12,8 @@ This project simulates an airport flight information screen, allowing users to v
 3. **`generaterandomdata.py`**: Generates random flight data when test mode is activated.
 4. **`loadingmotions.py`**: Provides animations for terminal progress bars or loading screens.
 5. **`consultairlineflightcode.py`**: Consult IATA to check the two-letter code associated with a specific airline.
+6. **`formattime.py`**: To format date and time.
+7. **`cleaninput.py`**: To clean the user input.
 
 ## Getting Started
 
@@ -35,8 +33,14 @@ Run the program to display flights:
 python displayflights.py
 ```
 
+Run the program to manage flights information:
+```bash
+python managedatabase.py
+```
+
 #### Test Mode
 Run the program with the `--test` option to populate the database with random data for demo purposes:
 ```bash
+python displayflights.py --test
 python managedatabase.py --test
 ```
