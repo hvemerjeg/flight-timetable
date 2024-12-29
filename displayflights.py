@@ -6,11 +6,12 @@ from time import sleep, time
 from os import system, remove, path, get_terminal_size
 import logging
 import argparse
+sys.path.append('./auxiliary')
 
 import managedatabase
-import loadingmotions
-import generaterandomdata
-from formattime import formatTime
+from auxiliary import loadingmotions
+from auxiliary import generaterandomdata
+from auxiliary.formattime import formatTime
 
 # Constants
 ARRIVALS = 'arrivals'

@@ -8,12 +8,13 @@ import re
 import signal
 import argparse
 import glob
+sys.path.append('./auxiliary')
 
-import consultairlineflightcode
-from formattime import formatDateTime
-import generaterandomdata
-import loadingmotions
-import cleaninput
+from auxiliary import consultairlineflightcode
+from auxiliary.formattime import formatDateTime
+from auxiliary import generaterandomdata
+from auxiliary import loadingmotions
+from auxiliary import cleaninput
 
 # Constants
 ARRIVALS = 'arrivals'
