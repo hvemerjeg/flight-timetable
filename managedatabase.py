@@ -284,7 +284,7 @@ def main():
     if flight_manager.isEmpty():
         parser.print_help()
         exit(1)
-    menu = '\n\n1) Update flight status\n2) Update flight time\n3) Update flight gate\n4) Insert new flight\n5) Delete a flight\n6) Get flight\n7) Display flghts\n8) Exit'
+    menu = '\n\n1) Update flight status\n2) Update flight time\n3) Update flight gate\n4) Insert new flight\n5) Delete a flight\n6) Get flight\n7) Display flights\n8) Exit'
     print(menu)
     user_option = input('')
     while user_option != '8':
