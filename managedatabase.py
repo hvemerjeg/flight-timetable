@@ -1,7 +1,7 @@
 import sqlite3
 from os import path, system, remove, get_terminal_size, name as _os_name
 import sys
-from time import time as _time, sleep
+from time import sleep
 import random
 from datetime import datetime, timedelta
 import re

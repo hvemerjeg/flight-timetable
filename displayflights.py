@@ -2,7 +2,7 @@ from datetime import datetime
 import sqlite3
 import signal
 import sys
-from time import sleep, time as _time
+from time import sleep
 from os import system, remove, path, get_terminal_size, name as _os_name
 import logging
 import argparse
