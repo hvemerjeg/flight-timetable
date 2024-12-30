@@ -82,9 +82,9 @@ class FlightsManager:
 
     def createTable(self, tablename:str) -> None:
         if tablename == DEPARTURES:
-            self.cursor.execute(f'CREATE TABLE {DEPARTURES}(id INTEGER PRIMARY KEY NOT NULL, flight_code TEXT NOT NULL, destination TEXT NOT NULL, time INTEGER NOT NULL, gate TEXT NOT NULL, status TEXT NOT NULL, airline TEXT NOT NULL);')
+            self.cursor.execute(f'CREATE TABLE {DEPARTURES}(id INTEGER PRIMARY KEY, flight_code TEXT NOT NULL, destination TEXT NOT NULL, time INTEGER NOT NULL, gate TEXT NOT NULL, status TEXT NOT NULL, airline TEXT NOT NULL);')
         elif tablename == ARRIVALS:
-            self.cursor.execute(f'CREATE TABLE {ARRIVALS}(id INTEGER PRIMARY KEY NOT NULL, flight_code TEXT NOT NULL, origin TEXT NOT NULL, time INTEGER NOT NULL, gate TEXT NOT NULL, status TEXT NOT NULL, airline TEXT NOT NULL);')
+            self.cursor.execute(f'CREATE TABLE {ARRIVALS}(id INTEGER PRIMARY KEY, flight_code TEXT NOT NULL, origin TEXT NOT NULL, time INTEGER NOT NULL, gate TEXT NOT NULL, status TEXT NOT NULL, airline TEXT NOT NULL);')
 
     def updateFlightTime(self, tablename:str, flight_code:str, new_time:str, flight_time:str) -> None:
         if tablename == ARRIVALS or tablename == DEPARTURES:
