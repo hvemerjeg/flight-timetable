@@ -3,7 +3,7 @@ import sqlite3
 import signal
 import sys
 from time import sleep, time as _time
-from os import system, remove, path, get_terminal_size
+from os import system, remove, path, get_terminal_size, name as _os_name
 import logging
 import argparse
 sys.path.append('./auxiliary')
@@ -32,7 +32,10 @@ class FlightTimeTableTerminal:
     def displayFlights(self, databasefile:str, stty_size:tuple) -> None:
     # display arrivals and departures
         epoch = int(datetime(datetime.now().year, datetime.now().month, datetime.now().day, datetime.now().hour, datetime.now().minute).timestamp())
-        system('clear')
+        if _os_name == 'nt':
+            system('cls')
+        else:
+            system('clear')
         for counter, table in enumerate((ARRIVALS, DEPARTURES)):
             tables = managedatabase.FlightsManager(databasefile=databasefile).getCurrentArrivals(epoch) if not counter else \
                     managedatabase.FlightsManager(databasefile=databasefile).getCurrentDepartures(epoch)

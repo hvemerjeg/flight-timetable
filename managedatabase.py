@@ -1,5 +1,5 @@
 import sqlite3
-from os import path, system, remove, get_terminal_size
+from os import path, system, remove, get_terminal_size, name as _os_name
 import sys
 from time import time as _time, sleep
 import random
@@ -66,11 +66,14 @@ class FlightsManager:
         # A backup is made each month
         if not backup_files or datetime(int(date_of_backup[0]), int(date_of_backup[1]), int(date_of_backup[2])) < \
                 datetime(datetime.now().year, datetime.now().month, datetime.now().day) - timedelta(days=31): 
-            current_date_time = datetime.now()
+            current_date_time = datetime(datetime.now().year, datetime.now().month, datetime.now().day)
             current_date_time_formatted = current_date_time.strftime('%Y-%m-%d_%H-%M-%S')
             # backup
             print(f'[ + ] Backing up database\nThis can take a while depending on the size of the database\n')
-            system(f'cp {self.databasefile} {self.databasefile}.bak_{current_date_time_formatted}')
+            if _os_name == 'nt':
+                system(f'copy {self.databasefile} {self.databasefile}.bak_{current_date_time_formatted}')
+            else:
+                system(f'cp {self.databasefile} {self.databasefile}.bak_{current_date_time_formatted}')
             # delete flights that are 31 or more days old
             self.cursor.execute('DELETE FROM arrivals WHERE time <= ?', (int(current_date_time.timestamp()) - 2678400, ))
             self.cursor.execute('DELETE FROM departures WHERE time <= ?', (int(current_date_time.timestamp()) - 2678400, ))
