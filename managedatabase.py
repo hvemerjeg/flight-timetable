@@ -8,7 +8,6 @@ import re
 import signal
 import argparse
 import glob
-sys.path.append('./auxiliary')
 
 from auxiliary import consultairlineflightcode
 from auxiliary.formattime import formatDateTime

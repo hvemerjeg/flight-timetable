@@ -6,7 +6,6 @@ from time import sleep
 from os import system, remove, path, get_terminal_size, name as _os_name
 import logging
 import argparse
-sys.path.append('./auxiliary')
 
 import managedatabase
 from auxiliary import loadingmotions
